@@ -1,1 +1,221 @@
-# Style.css
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: background 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Video Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-background iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+/* Overlay über Video für bessere Lesbarkeit */
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Phase Colors - jetzt als Overlay */
+body.warmup .video-background::after {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%);
+}
+
+body.work .video-background::after {
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.7) 0%, rgba(245, 87, 108, 0.7) 100%);
+}
+
+body.rest .video-background::after {
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.7) 0%, rgba(0, 242, 254, 0.7) 100%);
+}
+
+body.cooldown .video-background::after {
+    background: linear-gradient(135deg, rgba(67, 233, 123, 0.7) 0%, rgba(56, 249, 215, 0.7) 100%);
+}
+
+body.finished .video-background::after {
+    background: linear-gradient(135deg, rgba(255, 216, 155, 0.8) 0%, rgba(25, 84, 123, 0.8) 100%);
+}
+
+/* Phase Colors - Fallback wenn kein Video */
+body.warmup {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body.work {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+body.rest {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+body.cooldown {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+body.finished {
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+}
+
+/* Container */
+.container {
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Phase Name */
+.phase-name {
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Timer */
+.timer {
+    font-size: 15rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    line-height: 1;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 80vw;
+    max-width: 1200px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 auto 3rem auto;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-fill {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    width: 0%;
+    transition: width 1s linear;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Workout Info */
+.workout-info {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    font-size: 2rem;
+    padding: 1.5rem 4rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-start {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-pause {
+    background: #FF9800;
+    color: white;
+}
+
+.btn-reset {
+    background: #f44336;
+    color: white;
+}
+
+/* Responsive - für kleinere Bildschirme */
+@media (max-width: 1200px) {
+    .timer {
+        font-size: 10rem;
+    }
+    
+    .phase-name {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .timer {
+        font-size: 6rem;
+    }
+    
+    .phase-name {
+        font-size: 2.5rem;
+    }
+    
+    .btn {
+        font-size: 1.5rem;
+        padding: 1rem 2.5rem;
+    }
+}
